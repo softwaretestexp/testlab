@@ -1,6 +1,6 @@
 import requests
 import time
-import logging
+from .logger import getLogger
 import sys
 import typing
 
@@ -15,20 +15,10 @@ THROTTLE_RETRIES = 500
 # wait few seconds each time on throttle retry
 THROTTLE_TIMEWAIT = 6
 
-logger = logging.getLogger("REQUEST")
-formatter = logging.Formatter("%(asctime)s: %(name)s: %(levelname)s: %(message)s", datefmt="%H:%M:%S")
-handler = logging.StreamHandler(sys.stderr)
-handler.setFormatter(formatter)
-logger.addHandler(handler)
-logger.setLevel(logging.INFO)
-
-# Don't display info for requests etc.
-logging.getLogger("urllib3").setLevel(logging.WARNING)
-
-
 def download(url: str, fp: typing.IO, **kwargs) -> typing.IO:
     """Wrapper requests.post call"""
-    logger.debug("URL: {}".format(url))
+    logger = getLogger("REQUEST")
+    logger.debug(f"URL: {url}")
     kwargs["timeout"] = 20
     try:
         for j in range(THROTTLE_RETRIES):
@@ -74,7 +64,8 @@ def download(url: str, fp: typing.IO, **kwargs) -> typing.IO:
 
 def get(url: str, params=None, **kwargs) -> requests.Response:
     """Wrapper requests.post call"""
-    logger.debug("URL: {}".format(url))
+    logger = getLogger("REQUEST")
+    logger.debug(f"URL: {url}")
     kwargs["timeout"] = POST_TIMEOUT
     try:
         for j in range(THROTTLE_RETRIES):
@@ -108,7 +99,8 @@ def get(url: str, params=None, **kwargs) -> requests.Response:
 
 def post(url: str, data: str = None, json=None, **kwargs) -> requests.Response:
     """Wrapper requests.post call"""
-    logger.debug("URL: {}".format(url))
+    logger = getLogger("REQUEST")
+    logger.debug(f"URL: {url}")
     kwargs["timeout"] = POST_TIMEOUT
     try:
         for j in range(THROTTLE_RETRIES):
@@ -139,7 +131,8 @@ def post(url: str, data: str = None, json=None, **kwargs) -> requests.Response:
 
 def put(url: str, data: str = None, **kwargs) -> requests.Response:
     """Wrapper requests.put call"""
-    logger.debug("URL: {}".format(url))
+    logger = getLogger("REQUEST")
+    logger.debug(f"URL: {url}")
     kwargs["timeout"] = POST_TIMEOUT
     try:
         for j in range(THROTTLE_RETRIES):
@@ -170,7 +163,8 @@ def put(url: str, data: str = None, **kwargs) -> requests.Response:
 
 def delete(url: str, **kwargs) -> requests.Response:
     """Wrapper requests.put call"""
-    logger.debug("URL: {}".format(url))
+    logger = getLogger("REQUEST")
+    logger.debug(f"URL: {url}")
     kwargs["timeout"] = POST_TIMEOUT
     try:
         for j in range(THROTTLE_RETRIES):

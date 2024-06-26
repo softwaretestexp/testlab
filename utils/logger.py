@@ -1,7 +1,7 @@
 import logging
 import os
 
-def getLogger(componentName: str, logfile: str = None) -> logging.Logger:
+def getLogger(componentName: str, *, logfile: str = None) -> logging.Logger:
     logger = logging.getLogger(componentName)
     if not logger.hasHandlers():  # Prevent adding multiple handlers to the logger
         formatter = logging.Formatter("%(asctime)s: %(name)s: %(levelname)s: %(message)s", datefmt="%H:%M:%S")
