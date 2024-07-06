@@ -1,0 +1,24 @@
+# pytest cache
+.cache
+*.pyc
+__pycache__/
+
+# pytest HTML report (if you use a plugin to generate reports)
+htmlcov/
+html_report/
+
+# pytest JUnit report files (if you generate these)
+junit*
+
+# Other common ignores
+.env
+*.log
+*.swp
+.DS_Store
+
+# editor/IDE specific ignores
+.idea/
+.vscode/
+
+# pytest cache
+.pytest_cache/
