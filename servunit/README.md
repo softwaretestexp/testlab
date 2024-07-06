@@ -51,7 +51,3 @@ The tests included in this project are:
 - **test_invalid_address**: Tests the response when providing an invalid address.
 - **test_geocode_missing_params**: Tests the response when required parameters are missing in a geocode request.
 - **test_reverse_geocode_missing_params**: Tests the response when required parameters are missing in a reverse geocode request.
-
-## License
-
-This project is licensed under the MIT License.
